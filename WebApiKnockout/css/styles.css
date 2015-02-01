@@ -1,0 +1,30 @@
+﻿body {
+    background-color: whitesmoke;
+}
+
+#tblSearchArtists th {
+    color: #f00;
+}
+
+#tblSelectedAlbumTracks thead tr td {
+    color: #f00;
+}
+
+.first {
+    color: blue;
+}
+
+#divTrackUpdated {
+    padding: 40px;
+    display: none;
+    width: 100%;
+    text-align: center;
+    background-color: #8FF186;
+    border: solid 1px #c3c3c3;
+    font-size:20px;
+    z-index:30;
+    position:absolute;
+    filter:alpha(opacity=40); /* IE */
+    -moz-opacity:0.4; /* Mozilla */
+    opacity: 0.4; /* CSS3 */
+}

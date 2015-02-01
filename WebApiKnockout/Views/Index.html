@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Chinook</title>
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script type="text/html" id="displayTrack">
+        <td><span class="first" data-bind="text: TrackId"></span></td>
+        <td><span data-bind="text: Name"></span></td>
+        <td><span data-bind="text: Genre"></span></td>
+        <td><span data-bind="text: Milliseconds"></span></td>
+        <td><span data-bind="text: FormattedPrice"></span></td>
+        <td>
+            <button data-bind="click: editTrack">Edit</button></td>
+    </script>
+    <script type="text/html" id="editTrack">
+        <td>
+            <span data-bind="text: TrackId" /></td>
+        <td>
+            <input data-bind="value: Name" /></td>
+        <td>
+            <select id="selectGenres" data-bind="options: $root.Genres, optionsText: 'Name',
+    optionsValue: 'Name', value: $data.Genre">
+            </select></td>
+        <td>
+            <input data-bind="value: Milliseconds" /></td>
+        <td>
+            <input data-bind="value: UnitPrice" /></td>
+        <td>
+            <button data-bind="click: updateTrack">Update</button></td>
+        <td>
+            <button data-bind="click: cancelEditTrack">Cancel</button></td>
+    </script>
+</head>
+<body>
+    <div id="divTrackUpdated">Track was succesfully updated..</div>
+    <div style="z-index:10;position:relative">
+        <form action="Index.html">
+            Search an Artist:
+        <input type="text" id="inputSearchArtist" />
+            <button data-bind="click: searchArtists" type="button" id="btnSearch">Search</button>
+            <div id="divArtists">
+                <table style="visibility: hidden" id="tblSearchArtists">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Artist</th>
+                            <th>Albums</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: ArtistsSearched" id="tbodySearchArtists">
+                        <tr>
+                            <td><span class="first" data-bind="text: ArtistId"></span></td>
+                            <td><span data-bind="text: Name"></span></td>
+                            <td>
+                                <button data-bind=" click: $root.showArtistAlbums">View Albums</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="visibility: hidden; display: none" id="tblSearchArtistAlbums">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: ArtistAlbumsSearched" id="tbodySearchArtistAlbum">
+                        <tr>
+                            <td><span data-bind="text: AlbumId"></span></td>
+                            <td><span data-bind="text: Title"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="divSelectArtistAlbums" style="visibility: hidden">
+                    <select id="selectArtistAlbums" data-bind="options: ArtistAlbumsSearched, optionsText: 'Title',
+    optionsValue: 'AlbumId', event: { change: function (data, event) { showAlbumTracks($('#selectArtistAlbums').val(), data, event) } }">
+                    </select>
+                    <span>Select an Album</span>
+                    <br />
+                    <table id="tblSelectedAlbumTracks" style="visibility: hidden; width: 570px">
+                        <thead>
+                            <tr>
+                                <td>Id</td>
+                                <td>Name</td>
+                                <td>Genre</td>
+                                <td>Milliseconds</td>
+                                <td>Price</td>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyAlbumTracks" data-bind="foreach: AlbumTracks">
+                            <tr data-bind="template: { name: CurrentTemplate }">
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="../Scripts/knockout-2.3.0.js"></script>
+    <script src="../Scripts/jquery-2.0.3.min.js"></script>
+    <script src="../Scripts/index.js"></script>
+</body>
+</html>
